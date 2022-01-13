@@ -1,0 +1,16 @@
+/* #LAYOUT - FOOTER */
+.l-footer {
+	padding: 1rem 2.5rem;
+	background: $BLACK;
+}
+.l-footer__container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.l-footer__container p,
+.l-footer__container a {
+	color: $WHITE;
+	margin-bottom: 0;
+}

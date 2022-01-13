@@ -1,0 +1,110 @@
+<template>
+	<div class="wallet">
+		<TheButton v-if="!isConnected" title="Click to connect wallet" @click="connect">
+			Connect Wallet
+		</TheButton>
+		<div v-else class="wallet__details">
+			<Jazzicon :address="account" :diameter="28" />
+			<TheButton title="Click to disconnect wallet" @click="disconnect">
+				<span>{{ accountSlice }} | {{ accountBalance }}</span>
+			</TheButton>
+			<a target="_blank" href="http://34.209.136.11:8084/#faucet">💰</a>
+		</div>
+	</div>
+</template>
+
+<script>
+import Jazzicon from "vue-jazzicon";
+
+export default {
+	name: "TheWallet",
+	components: {
+		[Jazzicon.name]: Jazzicon,
+	},
+	data () {
+		return {
+			web3: null,
+			account: null,
+			balance: null,
+			ticker: null,
+			isConnected: false,
+			price: {
+				usx: 0,
+				hydro: 0
+			}
+		};
+	},
+
+	computed: {
+		accountSlice () {
+			const addr = this.account;
+			if (!addr) {
+				return "";
+			} else {
+				return `${addr.slice(0, 5)}...${addr.slice(38, 42)}`;
+			}
+		},
+
+		accountBalance () {
+			const bal = this.balance;
+			if (!bal) {
+				return "";
+			} else {
+				if (+bal === 0) {
+					return `0 ${this.ticker}`;
+				}
+				return `${parseFloat(this.web3.utils.fromWei(bal, "ether")).toFixed(4)} ${this.ticker}`;
+			}
+		},
+
+		roundPriceUsx () {
+			return parseFloat(this.price.usx).toFixed(2);
+		},
+
+		roundPriceHydro () {
+			return parseFloat(this.price.hydro).toFixed(2);
+		}
+	},
+
+	async mounted () {
+		/**
+     * @TODO check if the web3 givenProvider, needs to be changed
+     */
+		this.$store.dispatch("web3Store/init");
+
+		window.ethereum.on("chainChanged", async (chainId) => {
+			this.$store.commit("web3Store/setChainId", parseInt(chainId));
+			const balance = await this.web3.eth.getBalance(this.account);
+			this.$store.commit("web3Store/setBalance", balance);
+			this.$store.commit("web3Store/setTicker", parseInt(chainId));
+		});
+
+		this.$store.watch((state) => {
+			this.account = state.web3Store.account;
+			this.balance = state.web3Store.balance;
+			this.ticker = state.web3Store.ticker;
+		});
+
+		this.price.usx = await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"];
+		this.price.hydro = await this.$store.getters["stabilityFlashStore/getHydroPriceInUSDC"];
+	},
+
+	methods: {
+		async connect () {
+			await this.$store.dispatch("web3Store/connect");
+			this.web3 = this.$store.getters["web3Store/instance"]();
+			this.$store.dispatch("erc20Store/initializeBalance", {
+				address: this.account,
+				chainId: this.$store.getters["web3Store/chainId"],
+				web3: this.web3
+			});
+
+			this.isConnected = true;
+		},
+
+		disconnect () {
+			this.isConnected = false;
+		}
+	}
+};
+</script>

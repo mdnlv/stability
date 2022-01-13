@@ -1,0 +1,33 @@
+/* #COMPONENT - BURN CARD */
+.burn-card {
+	border-top: 1px solid $GREY_DARKER;
+	margin-top: 2rem;
+	padding-top: 3rem;
+}
+.burn-card .btn {
+	min-width: 110px;
+}
+.burn-card .input {
+	margin-bottom: 1rem;
+}
+.burn-card__addon {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+.burn-card__addon:first-child {
+	padding: 0 1rem;
+}
+.burn-card__price {
+	padding: 0 1rem;
+}
+.burn-card__price p {
+	margin-bottom: 0;
+	color: $GREY_DARK;
+}
+.burn-card__price p span {
+	font-weight: 900;
+	color: $BLACK;
+}

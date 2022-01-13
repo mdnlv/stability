@@ -1,0 +1,11 @@
+/* #LAYOUT - CONTAINER */
+.l-container {
+	padding: 3rem 6rem;
+	width: 100%;
+	margin: 0 auto;
+	background: $WHITE;
+}
+.l-container--sm {
+	max-width: 480px;
+	padding: 3rem 0;
+}

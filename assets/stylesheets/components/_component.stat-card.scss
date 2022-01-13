@@ -1,0 +1,19 @@
+/* #COMPONENT - STAT CARD */
+.stat-card {
+	display: flex;
+	flex-direction: column;
+	background: $WHITE;
+	padding: 1rem;
+	border-radius: 5px;
+	position: relative;
+}
+.stat-card h5 {
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+}
+.stat-card p {
+	margin-bottom: 0;
+	color: $GREY_DARKER;
+	font-weight: 600;
+}

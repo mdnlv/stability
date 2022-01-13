@@ -1,0 +1,94 @@
+/* #COMPONENT - MODAL */
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	z-index: 2;
+}
+.modal,
+.modal__overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: $BLACK_OPACITY;
+}
+.modal h4,
+.modal p {
+	color: $WHITE;
+}
+.modal__container {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 0px 2rem;
+	background-color: $BLACK;
+	border: 1px solid $BLACK_LIGHT;
+	box-shadow: $BOX_SHADOW_MODAL;
+	padding: 0px;
+	width: 50vw;
+	overflow: hidden auto;
+	align-self: center;
+	max-width: 420px;
+	max-height: 80vh;
+	min-height: 80vh;
+	border-radius: 20px;
+	z-index: 2;
+}
+.modal__header {
+	padding: 1rem;
+	border-bottom: 1px solid $BLACK_LIGHT;
+}
+.modal__subheader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+.modal__filter {
+	width: 100%;
+	display: flex;
+	padding: 0px;
+	align-items: center;
+	justify-content: flex-start;
+}
+.modal__filter input {
+	position: relative;
+	display: flex;
+	padding: 1rem;
+	align-items: center;
+	width: 100%;
+	white-space: nowrap;
+	background: none;
+	outline: none;
+	border-radius: 20px;
+	color: $WHITE;
+	border: 1px solid $BLACK_LIGHTER;
+	appearance: none;
+	font-size: 18px;
+	transition: border 100ms ease 0s;
+}
+.modal__filter input:focus {
+	border: 1px solid rgb(33, 114, 229);
+	outline: none;
+}
+.modal__body {
+	overflow-y: scroll;
+}
+.modal__results {
+	text-align: center;
+	color: $GREY;
+	padding: 1rem;
+	font-weight: 900;
+	font-size: 16px;
+}
+.modal-fade-enter,
+.modal-fade-leave-to {
+	opacity: 0;
+}
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+	transition: opacity 0.5s ease;
+}

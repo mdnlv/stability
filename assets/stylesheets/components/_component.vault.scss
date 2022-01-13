@@ -1,0 +1,41 @@
+/* #COMPONENT - VAULT */
+.vault {
+	display: flex;
+	flex-direction: column;
+	background: $GREY_LIGHT;
+	padding: 1rem;
+	border-radius: 10px;
+	margin-top: 1rem;
+}
+.vault h5 {
+	font-family: $FONT_BODY;
+}
+.vault .btn {
+	transition: none;
+}
+.vault .btn[disabled] {
+	background: $GREY_LIGHT;
+	color: $GREY_DARK;
+	opacity: 1;
+	cursor: default;
+	min-width: 76px;
+}
+.vault .btn--token[disabled] {
+	padding-right: 0;
+	padding-left: 0;
+}
+.vault .btn[disabled] svg {
+	display: none;
+}
+.vault .btn--token {
+	padding-right: 35px;
+}
+.vault .btn--token svg {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	transform: translate(0%, -50%);
+}
+.vault .btn--swap {
+	margin: 0.5rem auto;
+}

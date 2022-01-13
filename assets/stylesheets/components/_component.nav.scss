@@ -1,0 +1,32 @@
+/* #COMPONENT - NAV */
+.nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.nav a {
+	color: $GREY;
+	text-decoration: none;
+	padding: 8px 12px;
+	margin-right: 1rem;
+}
+.nav a:last-child {
+	margin-right: 0;
+}
+.nav a:hover {
+	color: $WHITE;
+}
+.nav a svg {
+	fill: $GREY;
+	height: 12px;
+	margin-left: 5px;
+}
+.nav .nuxt-link-exact-active {
+	background: $BLACK_LIGHT;
+	border-radius: 12px;
+	color: $WHITE;
+	font-weight: 600;
+}
+.nav {
+	margin-bottom: 0;
+}

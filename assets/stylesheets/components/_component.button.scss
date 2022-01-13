@@ -1,0 +1,89 @@
+/* #COMPONENT - BUTTON */
+.btn {
+	display: inline-flex;
+	appearance: none;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+	position: relative;
+	white-space: nowrap;
+	vertical-align: middle;
+	outline: transparent solid 2px;
+	outline-offset: 2px;
+	width: auto;
+	border-radius: 6px;
+	font-family: $FONT_BODY;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition-property: background-color, border-color, color, fill, stroke,
+		opacity, box-shadow, transform;
+	transition-duration: 0.2s;
+	background: $TEAL;
+	color: $WHITE;
+	cursor: pointer;
+	border: none;
+}
+.btn:hover {
+	background: $TEAL_DARK;
+}
+.btn:active {
+	background: $TEAL_DARKER;
+}
+.btn:focus {
+	box-shadow: $BOX_SHADOW_FOCUS;
+}
+.btn[disabled] {
+	cursor: not-allowed;
+	opacity: 0.4;
+}
+.btn[readonly] {
+	pointer-events: none;
+	background: none;
+	border: none;
+	color: black;
+}
+.btn--xs {
+	height: 24px;
+	line-height: 12px;
+	min-width: 24px;
+	font-size: 12px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.btn--sm {
+	height: 32px;
+	line-height: 16px;
+	min-width: 32px;
+	font-size: 14px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.btn--md {
+	height: 40px;
+	line-height: 20px;
+	min-width: 40px;
+	font-size: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+.btn--lg {
+	height: 48px;
+	line-height: 24px;
+	min-width: 48px;
+	font-size: 18px;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+.btn--icon {
+	transition: 0.3s ease;
+	background: $TRANSPARENT;
+}
+.btn--icon:hover {
+	transform: rotate(180deg);
+	background: $TRANSPARENT;
+}
+.btn--swap svg,
+.btn--token svg {
+	fill: $WHITE;
+	width: 25px;
+}

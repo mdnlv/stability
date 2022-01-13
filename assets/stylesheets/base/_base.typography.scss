@@ -1,0 +1,53 @@
+/* #BASE - TYPOGRAPHY */
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: $FONT_HEADING;
+	color: $BLACK;
+	word-break: break-word;
+	word-wrap: break-word;
+	font-weight: lighter;
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	line-height: 1.2;
+}
+h1 {
+	font-size: $HEADING_ONE;
+}
+h2 {
+	font-size: $HEADING_TWO;
+}
+h3 {
+	font-size: $HEADING_THREE;
+}
+h4 {
+	font-size: $HEADING_FOUR;
+}
+h5 {
+	font-size: $HEADING_FIVE;
+}
+p,
+blockquote,
+ul,
+ol,
+time,
+sup {
+	color: $BLACK;
+	line-height: 1.5;
+	margin-top: 0;
+	margin-bottom: 10px;
+	word-break: break-word;
+	word-wrap: break-word;
+}
+ul,
+li {
+	padding-left: 0;
+	list-style: none;
+}
+ol {
+	list-style-type: decimal;
+}

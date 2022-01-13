@@ -1,0 +1,20 @@
+/* #COMPONENT - COUNTDOWN */
+.countdown {
+	display: inline-grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 0;
+	padding: 0;
+	margin: 0;
+}
+.countdown__block {
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+}
+.countdown__block:last-child {
+	margin-right: 0;
+}
+.countdown__block p {
+	text-transform: uppercase;
+	font-size: $BODY_TEXT_SM;
+}
