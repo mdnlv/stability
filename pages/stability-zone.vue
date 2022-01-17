@@ -114,7 +114,7 @@ export default {
 		this.claimRatio = await this.$store.getters["stabilityFlashStore/getClaimRatio"];
 		this.tolerance.high = await this.$store.getters["stabilityFlashStore/getToleranceHigh"];
 		this.stakedBalance = parseFloat(await this.$store.getters["stabilityFlashStore/getStakedBalance"]);
-		// this.tolerance.low = await this.$store.getters["stabilityFlashStore/getToleranceLow"];
+		this.tolerance.low = await this.$store.getters["stabilityFlashStore/getToleranceLow"];
 
 		this.$store.watch((state) => {
 			const web3 = this.$store.getters["web3Store/instance"]();
