@@ -2,9 +2,6 @@
 	<div class="burn-card">
 		<div class="burn-card__addon">
 			<h3>{{ title }}</h3>
-			<TheButton title="Click to buy" :disabled="account === '' ">
-				Buy {{ tokenBurn }}
-			</TheButton>
 		</div>
 		<div class="input">
 			<div class="input__container">

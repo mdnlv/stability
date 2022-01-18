@@ -97,7 +97,7 @@ export default {
 			isModalVisible: false,
 			tolerance: {
 				high: 0,
-				low: 0.99
+				low: 0
 			},
 			account: "",
 		};

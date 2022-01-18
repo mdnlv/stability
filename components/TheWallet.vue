@@ -28,10 +28,6 @@ export default {
 			balance: null,
 			ticker: null,
 			isConnected: false,
-			price: {
-				usx: 0,
-				hydro: 0
-			}
 		};
 	},
 
@@ -56,17 +52,9 @@ export default {
 				return `${parseFloat(this.web3.utils.fromWei(bal, "ether")).toFixed(4)} ${this.ticker}`;
 			}
 		},
-
-		roundPriceUsx () {
-			return parseFloat(this.price.usx).toFixed(2);
-		},
-
-		roundPriceHydro () {
-			return parseFloat(this.price.hydro).toFixed(2);
-		}
 	},
 
-	async mounted () {
+	mounted () {
 		/**
      * @TODO check if the web3 givenProvider, needs to be changed
      */
@@ -84,9 +72,6 @@ export default {
 			this.balance = state.web3Store.balance;
 			this.ticker = state.web3Store.ticker;
 		});
-
-		this.price.usx = await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"];
-		this.price.hydro = await this.$store.getters["stabilityFlashStore/getHydroPriceInUSDC"];
 	},
 
 	methods: {
