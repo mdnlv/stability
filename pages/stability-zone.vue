@@ -43,7 +43,7 @@
 						<h3>{{ numberWithCommas(hxBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getHydroDollar(hxBalance).toFixed(2)) }}</h5>
 					</DataCard>
-					<DataCard v-if="price.usx < tolerance.low">
+					<DataCard v-if="price.usx < tolerance.low && account !== ''">
 						<p>Staked in vesting: </p>
 						<h3>{{ numberWithCommas(stakedBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getStakedDollar(stakedBalance).toFixed(2)) }}</h5>

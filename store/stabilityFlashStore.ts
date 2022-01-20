@@ -13,7 +13,7 @@ export const state = () => ({
      */
 		31010: {
 			stabilityFlash: "0x89C6a7995f63FB9b4BB5b75D72eeBf022F388452"
-		}
+		}	
 	}
 });
 
@@ -72,7 +72,7 @@ export const getters: GetterTree<StabilityState, Web3State> = {
 
 	getStakedBalance: async (_state: any, getters: any, store: any) => {
 		const web3 = store.web3Store.instance();
-		return web3.utils.fromWei(await getters.instance.methods.viewStakedBalance("0x0e11924EE7DA81B3d9aBcc2339e562fc3747B3Bf").call());
+		return store.web3Store.account ? web3.utils.fromWei(await getters.instance.methods.viewStakedBalance(store.web3Store.account).call()) : 0;
 	},
 
 	getClaimRatio: async (_state: any, getters: any, _store: any) => {
