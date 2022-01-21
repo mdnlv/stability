@@ -56,8 +56,8 @@ export default {
 			const svgRule = config.module.rules.find(rule => rule.test.test(".svg"));
 
 			if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-      }
+				config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+			}
 			
 			svgRule.test = /\.(png|jpe?g|gif|webp)$/;
 
