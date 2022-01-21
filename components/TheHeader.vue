@@ -1,9 +1,9 @@
 <template>
-	<header class="l-header">
+	<LayoutHeader>
 		<TheLogo />
 		<TheNav />
 		<TheWallet />
-	</header>
+	</LayoutHeader>
 </template>
 
 <script>

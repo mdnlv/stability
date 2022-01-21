@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="l-stat-bar">
+		<LayoutStatBar>
 			<StatCard>
 				<h5>USX Price</h5>
 				<p>{{ numberWithCommas(price.usx.toFixed(2)) }} USX</p>
@@ -9,30 +9,37 @@
 				<h5>HX Price</h5>
 				<p>{{ numberWithCommas(price.hx.toFixed(2)) }} HX</p>
 			</StatCard>
-			<StatCard v-if="price.usx > tolerance.high">
-				<h5>Tolerance High</h5>
-				<p>{{ tolerance.high }} USX - Above peg zone enabled</p>
-				<div class="indicator" />
-			</StatCard>
-			<StatCard v-else-if="price.usx < tolerance.low">
-				<h5>Tolerance Low</h5>
-				<p>{{tolerance.low}} USX - Below peg zone enabled</p>
-				<div class="indicator" />
-			</StatCard>
-			<StatCard v-else>
-				<h5>Tolerance Within Range</h5>
-				<p>{{ numberWithCommas(price.usx.toFixed(2)) }} USX - There is nothing to do</p>
-				<div class="indicator" />
-			</StatCard>
 			<StatCard>
 				<h5>Rebalance fees in % of USX/HX</h5>
 				<p>{{ rebalanceFee }}%</p>
 			</StatCard>
-		</div>
-		<div class="l-container">
-			<h3>Stability Zone</h3>
-			<div class="l-data-card-container">
-				<div class="l-data-card">
+		</LayoutStatBar>
+		<LayoutContainer>
+			<LayoutTolerance>
+				<StatCard>
+					<h5>Peg In Range: <span>1.00 USX <TooltipIcon v-tooltip="'There is nothing to do when the price of USX is in range'" /></span></h5>
+				</StatCard>
+				<StatCard>
+					<h5>Peg High: <span>{{ tolerance.high }} USX <TooltipIcon v-tooltip="'When the price of USX is above ' + tolerance.high + ', the above peg zone is enabled. You will be able to claim your rewards and burn HX'" /></span></h5>
+				</StatCard>
+				<StatCard>
+					<h5>Peg Low: <span>{{ tolerance.low }} USX <TooltipIcon v-tooltip="'When the price of USX is below ' + tolerance.low + ', the below peg zone is enabled. You will be able to burn USX'" /></span></h5>
+				</StatCard>
+			</LayoutTolerance>
+			<LayoutDataCardContainer>
+				<DataCardHeader v-if="price.usx > tolerance.high">
+					<h3>Above peg zone is enabled</h3>
+					<h5>Tolerance high: <span>Peg is above {{ tolerance.high }} USX</span></h5>
+				</DataCardHeader>
+				<DataCardHeader v-else-if="price.usx < tolerance.low">
+					<h3>Below peg zone is enabled</h3>
+					<h5>Tolerance low: <span>Peg is below {{ tolerance.low }} USX</span></h5>
+				</DataCardHeader>
+				<DataCardHeader v-else>
+					<h3>Peg zone is in range</h3>
+					<h5>Tolerance normal: <span>Peg is 1.00 USX</span></h5>
+				</DataCardHeader>
+				<LayoutDataCard>
 					<DataCard>
 						<p>USX balance:</p>
 						<h3>{{ numberWithCommas(usxBalance.toFixed(2)) }}<sup>USX</sup></h3>
@@ -44,7 +51,7 @@
 						<h5>${{ numberWithCommas(getHydroDollar(hxBalance).toFixed(2)) }}</h5>
 					</DataCard>
 					<DataCard v-if="price.usx < tolerance.low">
-						<p>Staked in vesting: </p>
+						<p>Staked in vesting:</p>
 						<h3>{{ numberWithCommas(stakedBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getStakedDollar(stakedBalance).toFixed(2)) }}</h5>
 					</DataCard>
@@ -59,7 +66,7 @@
 					</DataCard>
 					<DataCard v-if="price.usx > tolerance.high">
 						<p>Next claim date:</p>
-						<TheCountdown />
+						<TheCountdown v-if="account !== ''"/>
 					</DataCard>
 					<DataCard v-if="price.usx > tolerance.high">
 						<p>Claim your profits:</p>
@@ -68,20 +75,25 @@
 						</TheButton>
 					</DataCard>
 					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" />
-				</div>
+				</LayoutDataCard>
 				<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
 					USX is within tolerance range. There is nothing to do.
 				</h4>
 				<BurnCard v-if="price.usx > tolerance.high" title="USX is above the peg" token-burn="HX" token-receive="USX" />
 				<BurnCard v-if="price.usx < tolerance.low" title="USX is below the peg" token-burn="USX" token-receive="HX" />
-			</div>
-		</div>
+			</LayoutDataCardContainer>
+		</LayoutContainer>
 	</div>
 </template>
 
 <script>
+import TooltipIcon from "@/assets/images/svg/svg-tooltip.svg";
+
 export default {
 	name: "TheStabilityZone",
+	components: {
+		TooltipIcon
+	},
 	data () {
 		return {
 			price: {

@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<div class="l-container">
+		<LayoutContainer>
 			<h1>Farms</h1>
-		</div>
+		</LayoutContainer>
 	</div>
 </template>
 

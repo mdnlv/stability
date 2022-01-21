@@ -1,0 +1,39 @@
+/* #LAYOUT - TOLERANCE */
+.l-tolerance,
+.l-tolerance__cards {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.l-tolerance {
+	justify-content: space-between;
+}
+.l-tolerance__cards .stat-card {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.l-tolerance__cards .stat-card h5,
+.l-tolerance__cards .stat-card span {
+	display: flex;
+	align-items: center;
+}
+.l-tolerance__cards .stat-card h5 {
+	margin-bottom: 0;
+}
+.l-tolerance__cards .stat-card svg {
+	cursor: pointer;
+	fill: $GREY_DARKER;
+	width: 20px;
+	margin-left: 0.2rem;
+}
+.l-tolerance__cards .stat-card svg:focus {
+	outline: 0;
+}
+.l-tolerance__cards .stat-card span {
+	color: $GREY_DARKER;
+	margin-left: 0.3rem;
+}
+
+.v-popper__popper {
+	max-width: 300px;
+}

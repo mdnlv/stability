@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="l-stat-bar">
+		<LayoutStatBar columns="4">
 			<StatCard>
 				<h5>Total Collateral Value</h5>
 				<p>{{ numberWithCommas(value.toFixed(2)) }} USX</p>
@@ -17,11 +17,11 @@
 				<h5>Collateralization Ratio</h5>
 				<p>{{ ratio.toFixed(2) }}</p>
 			</StatCard>
-		</div>
-		<div class="l-container l-container--sm">
+		</LayoutStatBar>
+		<LayoutContainer size="sm">
 			<h3>Caldron</h3>
 			<TheCaldron />
-		</div>
+		</LayoutContainer>
 	</div>
 </template>
 

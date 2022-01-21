@@ -1,11 +1,11 @@
 <template>
-	<div id="l-content">
+	<LayoutContent>
 		<TheHeader />
-		<div class="l-main">
+		<LayoutMain>
 			<Nuxt />
-		</div>
+		</LayoutMain>
 		<TheFooter />
-	</div>
+	</LayoutContent>
 </template>
 
 <script>

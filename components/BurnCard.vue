@@ -16,12 +16,14 @@
 					spellcheck="false"
 					inputmode="decimal"
 				>
-				<TheButton :disabled="isDisabled" title="Click to burn" @click="burnTokens">
-					Burn {{ tokenBurn }}
-				</TheButton>
-
-				<TheButton v-if="account !== ''" :disabled="account === '' " title="Click to approve" @click="approveTokens">
+				<TheButton v-if="tokenBurn === 'HX' && burn.value > allowance.hx || allowance.hx < 0" :disabled="account === '' " title="Click to approve" @click="approveTokens">
 					Approve {{ tokenBurn }}
+				</TheButton>
+				<TheButton v-else-if="tokenBurn === 'USX' && burn.value > allowance.usx || allowance.usx < 0" :disabled="account === '' " title="Click to approve" @click="approveTokens">
+					Approve {{ tokenBurn }}
+				</TheButton>
+				<TheButton v-else :disabled="isDisabled" title="Click to burn" @click="burnTokens">
+					Burn {{ tokenBurn }}
 				</TheButton>
 			</div>
 		</div>
@@ -52,7 +54,6 @@ export default {
 			required: true
 		}
 	},
-	// @TODO
 	data () {
 		return {
 			burn: {
@@ -61,8 +62,8 @@ export default {
 				dollar: 675.29
 			},
 			allowance: {
-				usx: 0,
-				hx: 0
+				usx: null,
+				hx: null
 			},
 			account: ""
 		};
@@ -77,9 +78,6 @@ export default {
 		usxPrice () {
 			return this.burn.value * this.burn.usx;
 		},
-		isApprove () {
-			return false;
-		}
 	},
 	mounted() {
 		this.$store.watch((state) => {
@@ -110,13 +108,18 @@ export default {
 		},
 
 		async approveTokens() {
+			const contractAddress = this.$store.getters["addressStore/stabilityFlash"];
 			if (this.tokenBurn === "HX" && this.account !== "") {
+				const hydroAllowance = await this.$store.getters["erc20Store/hydro"].methods.allowance(this.account, contractAddress).call();
+				this.allowance.hx = hydroAllowance;
 				await this.$store.dispatch("erc20Store/approveHydro", {
 					address: this.account,
-					chainId: this.$store.getters["web3Store/chainId"]
+					chainId: this.$store.getters["web3Store/chainId"],
 				});
 			}
 			if (this.tokenBurn === "USX" && this.account !== "") {
+				const usxAllowance = await this.$store.getters["erc20Store/usx"].methods.allowance(this.account, contractAddress).call();
+				this.allowance.usx = usxAllowance;
 				await this.$store.dispatch("erc20Store/approveUsx", {
 					address: this.account,
 					chainId: this.$store.getters["web3Store/chainId"]
