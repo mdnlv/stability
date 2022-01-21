@@ -1,24 +1,24 @@
 <template>
 	<div>
-		<div class="l-container">
+		<LayoutContainer>
 			<h3>Dashboard</h3>
-			<div class="l-data-card-container">
-				<div class="l-data-card">
-					<div class="data-card">
+			<LayoutDataCardContainer>
+				<LayoutDataCard>
+					<DataCard>
 						<p>USX price:</p>
 						<h3>{{ numberWithCommas(price.usx.toFixed(2)) }}</h3>
-					</div>
-					<div class="data-card">
+					</DataCard>
+					<DataCard>
 						<p>HX price:</p>
 						<h3>{{ numberWithCommas(price.hx.toFixed(2)) }}</h3>
-					</div>
+					</DataCard>
 					<DataCard v-for="(item, index) in items" :key="index">
 						<p>{{ item.label }}:</p>
 						<h3>{{ item.statistic }}</h3>
 					</DataCard>
-				</div>
-			</div>
-		</div>
+				</LayoutDataCard>
+			</LayoutDataCardContainer>
+		</LayoutContainer>
 	</div>
 </template>
 

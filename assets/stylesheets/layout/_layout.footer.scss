@@ -3,6 +3,9 @@
 	padding: 1rem 2.5rem;
 	background: $BLACK;
 }
+.l-footer .logo {
+	margin-right: 0;
+}
 .l-footer__container {
 	display: flex;
 	flex-direction: row;
@@ -10,7 +13,14 @@
 	justify-content: space-between;
 }
 .l-footer__container p,
+.l-footer__container ul {
+	width: 33.3%;
+}
+.l-footer__container p,
 .l-footer__container a {
 	color: $WHITE;
 	margin-bottom: 0;
+}
+.l-footer__container .block-number {
+	text-align: center;
 }

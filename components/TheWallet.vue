@@ -8,7 +8,6 @@
 			<TheButton title="Click to disconnect wallet" @click="disconnect">
 				<span>{{ accountSlice }} | {{ accountBalance }}</span>
 			</TheButton>
-			<a target="_blank" href="http://34.209.136.11:8084/#faucet">💰</a>
 		</div>
 	</div>
 </template>
