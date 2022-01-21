@@ -15,7 +15,7 @@
 					</div>
 				</header>
 				<section id="modalDescription" class="modal__body">
-					<div v-for="(token, index) in filteredTokens" :key="index" class="token">
+					<div v-for="(token, index) in filteredTokens" :key="index" class="token" @click="transaction(token)">
 						<img :src="require(`~/assets/images/tokens/${token.name}.png`)" :alt="`${token.name} logo`">
 						<div class="token__body">
 							<h5>{{ token.symbol }}</h5>
@@ -66,6 +66,10 @@ export default {
 		closeModal () {
 			this.$emit("close-modal");
 			this.search = "";
+		},
+
+		transaction (token) {
+			console.log(token);
 		}
 	}
 };

@@ -88,6 +88,7 @@ export default {
 
 		disconnect () {
 			this.isConnected = false;
+			this.$store.dispatch("web3Store/disconnect");
 		}
 	}
 };

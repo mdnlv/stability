@@ -117,6 +117,10 @@ export const actions: ActionTree<Web3State, Web3State> = {
 				console.log(e);
 			}
 		}
+	},
+
+	disconnect ({ commit }) {
+		commit("setAccount", "");
 	}
 };
 

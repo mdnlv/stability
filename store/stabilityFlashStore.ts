@@ -14,13 +14,17 @@ export const state = () => ({
 		31010: {
 			stabilityFlash: "0x89C6a7995f63FB9b4BB5b75D72eeBf022F388452"
 		}	
-	}
+	},
+
+	readyToClaim: false
 });
 
 export type StabilityState = ReturnType<typeof state>
 
 export const mutations: MutationTree<StabilityState> = {
-
+	setReadyToClaim (state, payload) {
+		state.readyToClaim = payload;
+	},
 };
 
 export const actions: ActionTree<StabilityState, StabilityState> = {
@@ -92,5 +96,7 @@ export const getters: GetterTree<StabilityState, Web3State> = {
 	getViewRatio: (_state: any, getters: any, _store: any) => {
 		return getters.instance.methods;
 	},
+
+	getReadyToClaim: state => state.readyToClaim,
 
 };

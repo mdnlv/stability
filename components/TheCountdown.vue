@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="!isLoaded" class="loader"></div>
-		<div v-if="isLoaded && !expired" class="countdown">
+		<div v-if="isLoaded && !readyToClaim" class="countdown">
 			<div class="countdown__block">
 				<h3>{{days}}</h3>
 				<p>Days</p>
@@ -19,7 +19,7 @@
 				<p>Secs</p>
 			</div>
 		</div>
-		<h3 v-if="expired">Claim now</h3>
+		<h3 v-if="readyToClaim">Claim now</h3>
 	</div>
 </template>
 
@@ -32,13 +32,20 @@ export default {
 			hours: 0,
 			minutes: 0,
 			seconds: 0,
-			isLoaded: false,
-			expired: false
+			isLoaded: false
 		};
 	},
+
+	computed: {
+		readyToClaim() {
+			return this.$store.getters["stabilityFlashStore/getReadyToClaim"];
+		}
+	},
+
 	mounted() {
 		this.showRemaining();
 	},
+
 	methods: {
 		formatNum(num) {
 			return num < 10 ? "0" + num : num;
@@ -46,12 +53,12 @@ export default {
 		showRemaining() {
 			const timer = setInterval(() => {
 				const now = new Date();
-				const end = new Date(2022, 0, 30, 10, 10, 10, 10);
+				const end = new Date(2022, 0, 25, 13, 51, 10, 10);
 				const distance = end.getTime() - now.getTime();
 
 				if(distance < 0) {
 					clearInterval(timer);
-					this.expired = true;
+					this.$store.commit("stabilityFlashStore/setReadyToClaim", true);
 					this.isLoaded = true;
 					return;
 				}

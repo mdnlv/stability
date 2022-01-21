@@ -70,7 +70,7 @@
 					</DataCard>
 					<DataCard v-if="price.usx > tolerance.high">
 						<p>Claim your profits:</p>
-						<TheButton :disabled="account === '' " @click="showModal">
+						<TheButton :disabled="account === '' || numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim" @click="showModal">
 							Claim
 						</TheButton>
 					</DataCard>
@@ -111,7 +111,7 @@ export default {
 				high: 0,
 				low: 0
 			},
-			account: "",
+			account: ""
 		};
 	},
 	head () {
@@ -119,6 +119,13 @@ export default {
 			title: "Stability Zone | Ultrastable Money"
 		};
 	},
+
+	computed: {
+		readyToClaim() {
+			return this.$store.getters["stabilityFlashStore/getReadyToClaim"];
+		}
+	},
+
 	async mounted () {
 		this.rebalanceFee = await this.$store.getters["stabilityFlashStore/getRebalanceFees"];
 		this.price.usx = parseFloat(await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"]);
