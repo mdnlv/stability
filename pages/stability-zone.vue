@@ -74,7 +74,8 @@
 							Claim
 						</TheButton>
 					</DataCard>
-					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" />
+					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" @show-toast="showToast" />
+					<TheToast v-show="isToastVisible" @close-toast="closeToast" :toast-type="toastType" />
 				</LayoutDataCard>
 				<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
 					USX is within tolerance range. There is nothing to do.
@@ -107,11 +108,13 @@ export default {
 			hxBalance: 0,
 			rebalanceFee: 0,
 			isModalVisible: false,
+			isToastVisible: false,
 			tolerance: {
 				high: 0,
 				low: 0
 			},
-			account: ""
+			account: "",
+			toastType: ""
 		};
 	},
 	head () {
@@ -149,6 +152,15 @@ export default {
 		},
 		closeModal () {
 			this.isModalVisible = false;
+			document.body.classList.remove("is-active");
+		},
+		showToast (type) {
+			this.toastType = type;
+			this.isToastVisible = true;
+			document.body.classList.add("is-active");
+		},
+		closeToast () {
+			this.isToastVisible = false;
 			document.body.classList.remove("is-active");
 		},
 		getUSXDollar(val) {

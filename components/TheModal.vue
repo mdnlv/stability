@@ -68,8 +68,21 @@ export default {
 			this.search = "";
 		},
 
+		closeToast () {
+			this.isToastVisible = false;
+			this.search = "";
+			document.body.classList.remove("is-active");
+		},
+
 		transaction (token) {
 			console.log(token);
+			this.claimHYDROProfits(true, "0x", "0x");
+			this.closeModal();
+			this.$emit("show-toast", "alert");
+		},
+
+		claimHYDROProfits(_claimInHYDRO, _paidIn, _HYDROToChosenRoute){
+			console.log(_claimInHYDRO, _paidIn, _HYDROToChosenRoute);
 		}
 	}
 };

@@ -1,0 +1,92 @@
+/* #COMPONENT - toast */
+.toast {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	z-index: 2;
+}
+.toast,
+.toast__overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: $BLACK_OPACITY;
+}
+.toast h4,
+.toast p {
+	color: $WHITE;
+}
+.toast__container {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 0px 2rem;
+	background-color: $BLACK;
+	border: 1px solid $BLACK_LIGHT;
+	box-shadow: $BOX_SHADOW_MODAL;
+	padding: 0px;
+	width: 50vw;
+	overflow: hidden auto;
+	align-self: center;
+	max-width: 420px;
+	max-height: 20vh;
+	min-height: 20vh;
+	border-radius: 20px;
+	z-index: 2;
+}
+.toast__header {
+	padding: 1rem;
+	border-bottom: 1px solid $BLACK_LIGHT;
+	color: $WHITE;
+}
+.toast__subheader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+.toast__filter {
+	width: 100%;
+	display: flex;
+	padding: 0px;
+	align-items: center;
+	justify-content: flex-start;
+}
+.toast__filter input {
+	position: relative;
+	display: flex;
+	padding: 1rem;
+	align-items: center;
+	width: 100%;
+	white-space: nowrap;
+	background: none;
+	outline: none;
+	border-radius: 20px;
+	color: $WHITE;
+	border: 1px solid $BLACK_LIGHTER;
+	appearance: none;
+	font-size: 18px;
+	transition: border 100ms ease 0s;
+}
+.toast__filter input:focus {
+	border: 1px solid rgb(33, 114, 229);
+	outline: none;
+}
+.toast__results {
+	text-align: center;
+	color: $GREY;
+	padding: 1rem;
+	font-weight: 900;
+	font-size: 16px;
+}
+.toast-fade-enter,
+.toast-fade-leave-to {
+	opacity: 0;
+}
+.toast-fade-enter-active,
+.toast-fade-leave-active {
+	transition: opacity 0.5s ease;
+}
