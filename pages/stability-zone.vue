@@ -70,7 +70,7 @@
 					</DataCard>
 					<DataCard v-if="price.usx > tolerance.high">
 						<p>Claim your profits:</p>
-						<TheButton :disabled="account === '' || numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim" @click="showModal">
+						<TheButton :disabled="account === '' /*|| numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim*/" @click="showModal">
 							Claim
 						</TheButton>
 					</DataCard>
