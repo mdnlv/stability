@@ -1,9 +1,7 @@
 /* #COMPONENT - LOGO */
 .logo,
 .logo:hover {
+	font-family: $FONT_HEADING;
 	color: $WHITE;
 	text-decoration: none;
-}
-.logo {
-	margin-right: 2rem;
 }

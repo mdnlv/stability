@@ -1,9 +1,7 @@
 <template>
-	<footer class="l-footer">
-		<div class="l-footer__container">
-			<slot />
-		</div>
-	</footer>
+	<div class="l-footer">
+		<slot />
+	</div>
 </template>
 
 <script>

@@ -1,26 +1,12 @@
 /* #LAYOUT - FOOTER */
 .l-footer {
-	padding: 1rem 2.5rem;
 	background: $BLACK;
-}
-.l-footer .logo {
-	margin-right: 0;
-}
-.l-footer__container {
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
 }
-.l-footer__container p,
-.l-footer__container ul {
-	width: 33.3%;
-}
-.l-footer__container p,
-.l-footer__container a {
+.l-footer p,
+.l-footer a {
 	color: $WHITE;
 	margin-bottom: 0;
-}
-.l-footer__container .block-number {
-	text-align: center;
+	font-size: 12px;
 }

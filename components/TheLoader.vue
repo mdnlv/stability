@@ -1,11 +1,9 @@
 <template>
-	<main class="l-main">
-		<slot />
-	</main>
+	<div class="loader"></div>
 </template>
 
 <script>
 export default {
-	name: "LayoutMain"
+	name: "TheLoader"
 };
 </script>

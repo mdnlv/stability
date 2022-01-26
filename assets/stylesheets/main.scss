@@ -16,6 +16,7 @@
 @import "components/component.button"; // Components - Button
 @import "components/component.countdown"; // Components - Countdown
 @import "components/component.data-card"; // Components - Data Card
+@import "components/component.hamburger"; // Components - Hamburger
 @import "components/component.input"; // Components - Input
 @import "components/component.loader"; // Components - Loader
 @import "components/component.logo"; // Components - Logo
@@ -33,8 +34,8 @@
 @import "layout/layout.content"; // Layout - Content
 @import "layout/layout.data-card"; // Layout - Data Card
 @import "layout/layout.error"; // Layout - Error
-@import "layout/layout.header"; // Layout - Header
 @import "layout/layout.footer"; // Layout - Footer
 @import "layout/layout.main"; // Layout - Main
+@import "layout/layout.sidebar"; // Layout - Sidebar
 @import "layout/layout.stat-bar"; // Layout - Stat Bar
 @import "layout/layout.tolerance"; // Layout - Tolerance

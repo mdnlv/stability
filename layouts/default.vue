@@ -1,10 +1,9 @@
 <template>
 	<LayoutContent>
-		<TheHeader />
+		<LayoutSidebar />
 		<LayoutMain>
 			<Nuxt />
 		</LayoutMain>
-		<TheFooter />
 	</LayoutContent>
 </template>
 

@@ -1,24 +1,10 @@
 <template>
-	<nav class="nav">
-		<nuxt-link to="/" title="Click to visit the dashboard">
-			Dashboard
-		</nuxt-link>
-		<nuxt-link to="/caldron" title="Click to visit caldron">
-			Caldron
-		</nuxt-link>
-		<nuxt-link to="/stability-zone" title="Click to visit the stability zone">
-			Stability Zone
-		</nuxt-link>
-		<nuxt-link to="/boardroom" title="Click to visit the boardroom">
-			Boardroom
-		</nuxt-link>
-		<nuxt-link to="/swap" title="Click to visit swap">
-			Swap
-		</nuxt-link>
-		<nuxt-link to="#" title="Click to visit the documentation">
-			Documentation <ExternalLinkSvg />
-		</nuxt-link>
-	</nav>
+	<ul class="nav">
+		<li v-for="(link, index) in links" :key="index">
+			<nuxt-link :to="link.url" :title="`Click to visit the ${link.name}`">{{ link.name }}</nuxt-link>
+		</li>
+		<a href="https://hydrolabs.gitbook.io/inflation-adjusted-algorithmic-stablecoin/" title="Click to visit the documentation" target="_blank" rel="noopener noreferrer">Documentation <ExternalLinkSvg /></a>
+	</ul>
 </template>
 
 <script>
@@ -27,6 +13,32 @@ export default {
 	name: "TheNav",
 	components: {
 		ExternalLinkSvg
-	}
+	},
+	data() {
+		return {
+			links: [
+				{
+					name: "Dashboard",
+					url: "/"
+				},
+				{
+					name: "Caldron",
+					url: "/caldron"
+				},
+				{
+					name: "Stability Zone",
+					url: "/stability-zone"
+				},
+				{
+					name: "Boardroom",
+					url: "/boardroom"
+				},
+				{
+					name: "Swap",
+					url: "/swap"
+				}
+			]
+		};
+	},
 };
 </script>

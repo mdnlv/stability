@@ -9,8 +9,8 @@ export default {
 	name: "LayoutStatBar",
 	props: {
 		columns: {
-			type: Number,
-			default: 3,
+			type: String,
+			default: "3",
 		},
 	},
 };

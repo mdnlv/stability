@@ -1,6 +1,7 @@
 <template>
 	<LayoutFooter>
-		<p>&copy; {{ currentYear }} <TheLogo /> | {{ appVersion }}</p>
+		<TheWallet />
+		<p>Version {{ appVersion }}</p>
 		<p class="block-number">Latest Block: <a :href="`https://etherscan.io/block/${blockNumber}`" title="Click to view the latest block" target="_blank" rel="noopener noreferrer">{{ blockNumber }}</a></p>
 		<ul class="social-icons">
 			<li>
