@@ -55,7 +55,7 @@
 						<h3>{{ numberWithCommas(stakedBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getStakedDollar(stakedBalance).toFixed(2)) }}</h5>
 					</DataCard>
-					<DataCard v-if="price.usx > tolerance.high">
+					<DataCard v-if="price.usx > tolerance.high && account !== ''">
 						<p>Pending to claim:</p>
 						<h3>{{ numberWithCommas(claimBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getClaimDollar(claimBalance).toFixed(2)) }}</h5>
@@ -75,7 +75,7 @@
 						</TheButton>
 					</DataCard>
 					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" @show-toast="showToast" />
-					<TheToast v-show="isToastVisible" @close-toast="closeToast" :toast-type="toastType" />
+					<TheToast v-show="isToastVisible" :toast-type="toastType" @close-toast="closeToast" />
 				</LayoutDataCard>
 				<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
 					USX is within tolerance range. There is nothing to do.
