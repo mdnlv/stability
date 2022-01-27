@@ -1,5 +1,5 @@
 <template>
-	<transition name="modal-fade">
+	<transition name="modal-fade" @after-enter="focusInput">
 		<div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
 			<div class="modal__overlay" @click="closeModal"></div>
 			<div class="modal__container">
@@ -11,7 +11,7 @@
 						</TheButton>
 					</div>
 					<div class="modal__filter">
-						<input v-model="search" type="text" placeholder="Search name of token" autocomplete="off">
+						<input ref="searchtoken" v-model="search" type="text" placeholder="Search name of token" autocomplete="off">
 					</div>
 				</header>
 				<section id="modalDescription" class="modal__body">
@@ -63,11 +63,13 @@ export default {
 		});
 	},
 	methods: {
+		focusInput() {
+			this.$nextTick(() => this.$refs.searchtoken.focus());
+		},
 		closeModal () {
 			this.$emit("close-modal");
 			this.search = "";
 		},
-
 		closeToast () {
 			this.isToastVisible = false;
 			this.search = "";

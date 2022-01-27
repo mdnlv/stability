@@ -6,7 +6,7 @@
 		<div v-else class="wallet__details">
 			<Jazzicon :address="account" :diameter="28" />
 			<TheButton title="Click to disconnect wallet" @click="disconnect">
-				<span>{{ accountSlice }} | {{ accountBalance }}</span>
+				<span>{{ accountSlice }}</span>
 			</TheButton>
 		</div>
 	</div>
@@ -25,7 +25,6 @@ export default {
 			web3: null,
 			account: null,
 			balance: null,
-			ticker: null,
 			isConnected: false,
 		};
 	},
@@ -37,18 +36,6 @@ export default {
 				return "";
 			} else {
 				return `${addr.slice(0, 5)}...${addr.slice(38, 42)}`;
-			}
-		},
-
-		accountBalance () {
-			const bal = this.balance;
-			if (!bal) {
-				return "";
-			} else {
-				if (+bal === 0) {
-					return `0 ${this.ticker}`;
-				}
-				return `${parseFloat(this.web3.utils.fromWei(bal, "ether")).toFixed(4)} ${this.ticker}`;
 			}
 		},
 	},
@@ -63,13 +50,11 @@ export default {
 			this.$store.commit("web3Store/setChainId", parseInt(chainId));
 			const balance = await this.web3.eth.getBalance(this.account);
 			this.$store.commit("web3Store/setBalance", balance);
-			this.$store.commit("web3Store/setTicker", parseInt(chainId));
 		});
 
 		this.$store.watch((state) => {
 			this.account = state.web3Store.account;
 			this.balance = state.web3Store.balance;
-			this.ticker = state.web3Store.ticker;
 		});
 	},
 

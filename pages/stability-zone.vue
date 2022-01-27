@@ -3,15 +3,21 @@
 		<LayoutStatBar>
 			<StatCard>
 				<h5>USX Price</h5>
-				<p>{{ numberWithCommas(price.usx.toFixed(2)) }} USX</p>
+				<TheLoader width="u-w-68">
+					<p>{{ numberWithCommas(price.usx.toFixed(2)) }} USX</p>
+				</TheLoader>
 			</StatCard>
 			<StatCard>
 				<h5>HX Price</h5>
-				<p>{{ numberWithCommas(price.hx.toFixed(2)) }} HX</p>
+				<TheLoader width="u-w-59">
+					<p>{{ numberWithCommas(price.hx.toFixed(2)) }} HX</p>
+				</TheLoader>
 			</StatCard>
 			<StatCard>
 				<h5>Rebalance fees in % of USX/HX</h5>
-				<p>{{ rebalanceFee }}%</p>
+				<TheLoader width="u-w-24">
+					<p>{{ rebalanceFee }}%</p>
+				</TheLoader>
 			</StatCard>
 		</LayoutStatBar>
 		<LayoutContainer>
@@ -20,25 +26,31 @@
 					<h5>Peg In Range: <span>1.00 USX <TooltipIcon v-tooltip="'There is nothing to do when the price of USX is in range'" /></span></h5>
 				</StatCard>
 				<StatCard>
-					<h5>Peg High: <span>{{ tolerance.high }} USX <TooltipIcon v-tooltip="'When the price of USX is above ' + tolerance.high + ', the above peg zone is enabled. You will be able to claim your rewards and burn HX'" /></span></h5>
+					<h5>Peg High: <TheLoader width="u-w-90"><span>{{ tolerance.high }} USX <TooltipIcon v-tooltip="'When the price of USX is above ' + tolerance.high + ', the above peg zone is enabled. You will be able to claim your rewards and burn HX'" /></span></TheLoader></h5>
 				</StatCard>
 				<StatCard>
-					<h5>Peg Low: <span>{{ tolerance.low }} USX <TooltipIcon v-tooltip="'When the price of USX is below ' + tolerance.low + ', the below peg zone is enabled. You will be able to burn USX'" /></span></h5>
+					<h5>Peg Low: <TheLoader width="u-w-95"><span>{{ tolerance.low }} USX <TooltipIcon v-tooltip="'When the price of USX is below ' + tolerance.low + ', the below peg zone is enabled. You will be able to burn USX'" /></span></TheLoader></h5>
 				</StatCard>
 			</LayoutTolerance>
 			<LayoutDataCardContainer>
-				<DataCardHeader v-if="price.usx > tolerance.high">
-					<h3>Above peg zone is enabled</h3>
-					<h5>Tolerance high: <span>Peg is above {{ tolerance.high }} USX</span></h5>
-				</DataCardHeader>
-				<DataCardHeader v-else-if="price.usx < tolerance.low">
-					<h3>Below peg zone is enabled</h3>
-					<h5>Tolerance low: <span>Peg is below {{ tolerance.low }} USX</span></h5>
-				</DataCardHeader>
-				<DataCardHeader v-else>
-					<h3>Peg zone is in range</h3>
-					<h5>Tolerance normal: <span>Peg is 1.00 USX</span></h5>
-				</DataCardHeader>
+				<TheLoader v-if="price.usx > tolerance.high" component="data-card-header">
+					<DataCardHeader>
+						<h3>Above peg zone is enabled</h3>
+						<h5>Peg high: <span>Peg is above {{ tolerance.high }} USX</span></h5>
+					</DataCardHeader>
+				</TheLoader>
+				<TheLoader v-else-if="price.usx < tolerance.low" component="data-card-header">
+					<DataCardHeader>
+						<h3>Below peg zone is enabled</h3>
+						<h5>Peg low: <span>Peg is below {{ tolerance.low }} USX</span></h5>
+					</DataCardHeader>
+				</TheLoader>
+				<TheLoader v-else component="data-card-header">
+					<DataCardHeader>
+						<h3>Peg zone is in range</h3>
+						<h5>Peg normal: <span>Peg is 1.00 USX</span></h5>
+					</DataCardHeader>
+				</TheLoader>
 				<LayoutDataCard>
 					<DataCard>
 						<p>USX balance:</p>
@@ -50,38 +62,40 @@
 						<h3>{{ numberWithCommas(hxBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getHydroDollar(hxBalance).toFixed(2)) }}</h5>
 					</DataCard>
-					<DataCard v-if="price.usx < tolerance.low && account !== ''">
+					<DataCardLoader v-if="price.usx < tolerance.low && account !== ''">
 						<p>Staked in vesting: </p>
 						<h3>{{ numberWithCommas(stakedBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getStakedDollar(stakedBalance).toFixed(2)) }}</h5>
-					</DataCard>
-					<DataCard v-if="price.usx > tolerance.high">
+					</DataCardLoader>
+					<DataCardLoader v-if="price.usx > tolerance.high">
 						<p>Pending to claim:</p>
 						<h3>{{ numberWithCommas(claimBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getClaimDollar(claimBalance).toFixed(2)) }}</h5>
-					</DataCard>
-					<DataCard v-if="price.usx > tolerance.low">
+					</DataCardLoader>
+					<DataCardLoader v-if="price.usx > tolerance.low">
 						<p>Your current claim ratio:</p>
 						<h3>{{ claimRatio }}%</h3>
-					</DataCard>
-					<DataCard v-if="price.usx > tolerance.high">
+					</DataCardLoader>
+					<DataCardLoader v-if="price.usx > tolerance.high">
 						<p>Next claim date:</p>
 						<TheCountdown v-if="account !== ''"/>
-					</DataCard>
-					<DataCard v-if="price.usx > tolerance.high">
+					</DataCardLoader>
+					<DataCardLoader v-if="price.usx > tolerance.high">
 						<p>Claim your profits:</p>
 						<TheButton :disabled="account === '' || numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim" @click="showModal">
 							Claim
 						</TheButton>
-					</DataCard>
+					</DataCardLoader>
 					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" @show-toast="showToast" />
 					<TheToast v-show="isToastVisible" :toast-type="toastType" @close-toast="closeToast" />
 				</LayoutDataCard>
-				<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
-					USX is within tolerance range. There is nothing to do.
-				</h4>
-				<BurnCard v-if="price.usx > tolerance.high" title="USX is above the peg" token-burn="HX" token-receive="USX" />
-				<BurnCard v-if="price.usx < tolerance.low" title="USX is below the peg" token-burn="USX" token-receive="HX" />
+				<TheLoader component="burn-card">
+					<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
+						USX is within peg range. There is nothing to do.
+					</h4>
+					<BurnCard v-if="price.usx > tolerance.high" title="USX is above the peg" token-burn="HX" token-receive="USX" />
+					<BurnCard v-if="price.usx < tolerance.low" title="USX is below the peg" token-burn="USX" token-receive="HX" />
+				</TheLoader>
 			</LayoutDataCardContainer>
 		</LayoutContainer>
 	</div>
@@ -122,13 +136,11 @@ export default {
 			title: "Stability Zone | Ultrastable Money"
 		};
 	},
-
 	computed: {
 		readyToClaim() {
 			return this.$store.getters["stabilityFlashStore/getReadyToClaim"];
-		}
+		},
 	},
-
 	async mounted () {
 		this.rebalanceFee = await this.$store.getters["stabilityFlashStore/getRebalanceFees"];
 		this.price.usx = parseFloat(await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"]);
@@ -137,6 +149,7 @@ export default {
 		this.tolerance.high = await this.$store.getters["stabilityFlashStore/getToleranceHigh"];
 		this.stakedBalance = parseFloat(await this.$store.getters["stabilityFlashStore/getStakedBalance"]);
 		this.tolerance.low = await this.$store.getters["stabilityFlashStore/getToleranceLow"];
+		this.$store.commit("rootStore/setIsLoaded", true);
 
 		this.$store.watch((state) => {
 			const web3 = this.$store.getters["web3Store/instance"]();

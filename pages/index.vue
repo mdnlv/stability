@@ -6,11 +6,15 @@
 				<LayoutDataCard>
 					<DataCard>
 						<p>USX price:</p>
-						<h3>{{ numberWithCommas(price.usx.toFixed(2)) }}</h3>
+						<TheLoader width="u-w-64 u-h-33">
+							<h3>{{ numberWithCommas(price.usx.toFixed(2)) }}</h3>
+						</TheLoader>
 					</DataCard>
 					<DataCard>
 						<p>HX price:</p>
-						<h3>{{ numberWithCommas(price.hx.toFixed(2)) }}</h3>
+						<TheLoader width="u-w-65 u-h-33">
+							<h3>{{ numberWithCommas(price.hx.toFixed(2)) }}</h3>
+						</TheLoader>
 					</DataCard>
 					<DataCard v-for="(item, index) in items" :key="index">
 						<p>{{ item.label }}:</p>
@@ -33,7 +37,7 @@ export default {
 			},
 			items: [
 				{
-					label: "Tolerance range",
+					label: "Peg range",
 					statistic: "5% around the peg"
 				},
 				{
@@ -49,7 +53,7 @@ export default {
 					statistic: "10,479"
 				},
 				{
-					label: "USX time in tolerance range",
+					label: "USX time in peg range",
 					statistic: "97%"
 				},
 				{
@@ -71,6 +75,7 @@ export default {
 	async mounted () {
 		this.price.usx = parseFloat(await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"]);
 		this.price.hx = parseFloat(await this.$store.getters["stabilityFlashStore/getHydroPriceInUSDC"]);
+		this.$store.commit("rootStore/setIsLoaded", true);
 	},
 	methods: {
 		/**

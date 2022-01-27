@@ -1,42 +1,55 @@
 /* #COMPONENT - LOADER */
-.loader,
-.loader:before,
-.loader:after {
-	border-radius: 50%;
-	width: 2.5em;
-	height: 2.5em;
-	animation-fill-mode: both;
-	animation: animate 1.8s infinite ease-in-out;
-}
 .loader {
-	color: $BLACK;
-	font-size: 5px;
-	margin: 0 auto 0 1.5rem;
+	width: auto;
+	background: $GREY_RGBA;
 	position: relative;
-	text-indent: -9999em;
-	transform: translateZ(0);
-	animation-delay: -0.16s;
-}
-.loader:before,
-.loader:after {
-	content: "";
-	position: absolute;
-	top: 0;
+	overflow: hidden;
+	border-radius: 5px;
 }
 .loader:before {
-	left: -3.5em;
-	animation-delay: -0.32s;
+	content: "";
+	animation: loading 1s infinite;
+	animation-timing-function: ease-in-out;
+	background-image: linear-gradient(
+		to left,
+		rgba(251, 251, 251, 0.1),
+		rgba(251, 251, 251, 0.2),
+		rgba(251, 251, 251, 0.3),
+		rgba(251, 251, 251, 0.2),
+		rgba(251, 251, 251, 0.1)
+	);
+	position: absolute;
+	left: 0;
+	transform: translateX(-150%);
+	height: 100%;
+	width: 50%;
 }
-.loader:after {
-	left: 3.5em;
-}
-@keyframes animate {
-	0%,
-	80%,
+@keyframes loading {
+	0% {
+		transform: translateX(-150%);
+	}
 	100% {
-		box-shadow: 0 2.5em 0 -1.3em;
+		transform: translateX(200%);
 	}
-	40% {
-		box-shadow: 0 2.5em 0 0;
-	}
+}
+.loader--default {
+	height: 24px;
+}
+.loader--data-card-header {
+	height: 33px;
+	width: auto;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+}
+.loader--data-card {
+	height: 116px;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+.loader--burn-card {
+	height: 167px;
+	margin-top: 2rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
