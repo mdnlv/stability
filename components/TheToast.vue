@@ -25,7 +25,7 @@
 
 <script>
 import CloseIcon from "@/assets/images/svg/svg-close.svg";
-import AlertIcon from "@/assets/images/svg/svg-alert.svg"; 	
+import AlertIcon from "@/assets/images/svg/svg-alert.svg";
 import SuccessIcon from "@/assets/images/svg/svg-success.svg";
 import TokenData from "@/assets/images/tokens/token-data.json";
 

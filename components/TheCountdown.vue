@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="!isLoaded" class="loader"></div>
+		<TheLoader v-if="!isLoaded" />
 		<div v-if="isLoaded && !readyToClaim" class="countdown">
 			<div class="countdown__block">
 				<h3>{{days}}</h3>
