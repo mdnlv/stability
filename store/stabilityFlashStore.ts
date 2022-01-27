@@ -50,7 +50,11 @@ export const actions: ActionTree<StabilityState, StabilityState> = {
 		await ctx.getters.instance.methods.burnUSX(
 			web3.utils.toWei(amount.toString())
 		).send({from: address});
-	}
+	},
+
+	async claimHydroProfits(ctx: any, {_claimInHYDRO, _paidIn, _HYDROToChosenRoute}) {
+		await ctx.getters.instance.methods.claimHYDROProfits(_claimInHYDRO, _paidIn, _HYDROToChosenRoute);
+	},
 };
 
 export const getters: GetterTree<StabilityState, Web3State> = {
@@ -98,5 +102,4 @@ export const getters: GetterTree<StabilityState, Web3State> = {
 	},
 
 	getReadyToClaim: state => state.readyToClaim,
-
 };

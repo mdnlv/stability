@@ -75,7 +75,7 @@
 						</TheButton>
 					</DataCard>
 					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" @show-toast="showToast" />
-					<TheToast v-show="isToastVisible" @close-toast="closeToast" :toast-type="toastType" />
+					<TheToast v-show="isToastVisible" :toast-type="toastType" @close-toast="closeToast" />
 				</LayoutDataCard>
 				<h4 v-if="price.usx <= tolerance.high && price.usx >= tolerance.low" class="in-range">
 					USX is within tolerance range. There is nothing to do.

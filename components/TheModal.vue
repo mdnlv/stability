@@ -15,7 +15,7 @@
 					</div>
 				</header>
 				<section id="modalDescription" class="modal__body">
-					<div v-for="(token, index) in filteredTokens" :key="index" class="token" @click="transaction(token)">
+					<div v-for="(token, index) in filteredTokens" :key="index" class="token" @click="claim(token)">
 						<img :src="require(`~/assets/images/tokens/${token.name}.png`)" :alt="`${token.name} logo`">
 						<div class="token__body">
 							<h5>{{ token.symbol }}</h5>
@@ -74,15 +74,19 @@ export default {
 			document.body.classList.remove("is-active");
 		},
 
-		transaction (token) {
+		async claim (token) {
 			console.log(token);
-			this.claimHYDROProfits(true, "0x", "0x");
 			this.closeModal();
-			this.$emit("show-toast", "alert");
-		},
-
-		claimHYDROProfits(_claimInHYDRO, _paidIn, _HYDROToChosenRoute){
-			console.log(_claimInHYDRO, _paidIn, _HYDROToChosenRoute);
+			try {
+				await this.$store.dispatch("stabilityFlashStore/claimHydroProfits", {
+					_claimInHYDRO: true,
+					_paidIn: "0x",
+					_HYDROToChosenRoute: "0x"
+				});
+				this.$emit("show-toast", "success");
+			} catch (error) {
+				this.$emit("show-toast", "alert");
+			}	
 		}
 	}
 };
