@@ -104,11 +104,15 @@ export const actions: ActionTree<Web3State, Web3State> = {
 				commit("setBalance", balance);
 				commit("setChainId", parseInt(chainId));
 				commit("setTicker", parseInt(chainId));
+				localStorage.setItem("account", account);
+				localStorage.setItem("balance", balance);
 
 				ethereum.on("accountsChanged", async (accounts: string[]) => {
 					const balance = await web3.eth.getBalance(accounts[0]);
 					commit("setAccount", accounts[0]);
 					commit("setBalance", balance);
+					localStorage.setItem("account", account[0]);
+					localStorage.setItem("balance", balance);
 				});
 				/**
        * @TODO implement error handling
@@ -121,15 +125,27 @@ export const actions: ActionTree<Web3State, Web3State> = {
 
 	disconnect ({ commit }) {
 		commit("setAccount", "");
+		commit("setBalance", 0);
+		localStorage.removeItem("account");
+		localStorage.removeItem("balance");
 	}
 };
 
 export const getters: GetterTree<Web3State, Web3State> = {
 	instance: state => state.instance,
-	balance: state => state.balance,
+	balance: state => {
+		if (state.account === "" && !localStorage.getItem("account")) {
+			return 0;
+		} else if (state.account === "" && localStorage.getItem("balance")) {
+			return localStorage.getItem("balance");
+		}
+		return state.balance;
+	},
 	account: (state) => {
-		if (state.account === "") {
+		if (state.account === "" && !localStorage.getItem("account")) {
 			return "";
+		} else if (state.account === "" && localStorage.getItem("account")) {
+			return localStorage.getItem("account");
 		}
 		return state.account;
 	},
