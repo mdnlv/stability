@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<TheLoader v-if="!isLoaded" />
-		<div v-if="isLoaded && !readyToClaim" class="countdown">
+		<div v-if="!readyToClaim" class="countdown">
 			<div class="countdown__block">
 				<h3>{{days}}</h3>
 				<p>Days</p>
@@ -32,20 +31,16 @@ export default {
 			hours: 0,
 			minutes: 0,
 			seconds: 0,
-			isLoaded: false
 		};
 	},
-
 	computed: {
 		readyToClaim() {
 			return this.$store.getters["stabilityFlashStore/getReadyToClaim"];
-		}
+		},
 	},
-
 	mounted() {
 		this.showRemaining();
 	},
-
 	methods: {
 		formatNum(num) {
 			return num < 10 ? "0" + num : num;
@@ -59,7 +54,6 @@ export default {
 				if(distance < 0) {
 					clearInterval(timer);
 					this.$store.commit("stabilityFlashStore/setReadyToClaim", true);
-					this.isLoaded = true;
 					return;
 				}
 
@@ -77,7 +71,6 @@ export default {
 				this.hours = this.formatNum(hours);
 				this.minutes = this.formatNum(minutes);
 				this.seconds = this.formatNum(seconds);
-				this.isLoaded = true;
 			}, 1000);
 		}
 	}

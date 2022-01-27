@@ -13,7 +13,7 @@ export const state = () => ({
      */
 		31010: {
 			stabilityFlash: "0x89C6a7995f63FB9b4BB5b75D72eeBf022F388452"
-		}	
+		}
 	},
 
 	readyToClaim: false
