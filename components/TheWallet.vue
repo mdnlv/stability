@@ -46,6 +46,10 @@ export default {
      */
 		this.$store.dispatch("web3Store/init");
 
+		if (localStorage.getItem("account")) {
+			this.connect();
+		}
+
 		window.ethereum.on("chainChanged", async (chainId) => {
 			this.$store.commit("web3Store/setChainId", parseInt(chainId));
 			const balance = await this.web3.eth.getBalance(this.account);

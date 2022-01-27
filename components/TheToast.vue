@@ -36,7 +36,12 @@ export default {
 		SuccessIcon,
 		CloseIcon
 	},
-	props: ["toastType"],
+	props: {
+		toastType: {
+			type: String,
+			required: true
+		}
+	},
 	data () {
 		return {
 			tokens: TokenData
