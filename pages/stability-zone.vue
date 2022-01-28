@@ -109,7 +109,7 @@ export default {
 	components: {
 		TooltipIcon
 	},
-	data () {
+	data() {
 		return {
 			price: {
 				usx: 0,
@@ -131,7 +131,7 @@ export default {
 			toastType: ""
 		};
 	},
-	head () {
+	head() {
 		return {
 			title: "Stability Zone | Ultrastable Money"
 		};
@@ -141,7 +141,7 @@ export default {
 			return this.$store.getters["stabilityFlashStore/getReadyToClaim"];
 		},
 	},
-	async mounted () {
+	async mounted() {
 		this.rebalanceFee = await this.$store.getters["stabilityFlashStore/getRebalanceFees"];
 		this.price.usx = parseFloat(await this.$store.getters["stabilityFlashStore/getUSXPriceInUSDC"]);
 		this.price.hx = parseFloat(await this.$store.getters["stabilityFlashStore/getHydroPriceInUSDC"]);
@@ -159,20 +159,20 @@ export default {
 		});
 	},
 	methods: {
-		showModal () {
+		showModal() {
 			this.isModalVisible = true;
 			document.body.classList.add("is-active");
 		},
-		closeModal () {
+		closeModal() {
 			this.isModalVisible = false;
 			document.body.classList.remove("is-active");
 		},
-		showToast (type) {
+		showToast(type) {
 			this.toastType = type;
 			this.isToastVisible = true;
 			document.body.classList.add("is-active");
 		},
-		closeToast () {
+		closeToast() {
 			this.isToastVisible = false;
 			document.body.classList.remove("is-active");
 		},

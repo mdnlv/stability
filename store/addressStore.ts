@@ -7,6 +7,7 @@ export const state = () => ({
      * @dev Hydro Testnet
      */
 		 31010: {
+			boardroom: "0xF1DbE13275E34E0aB19395E89b56a5d94C573552",
 			stabilityFlash: "0x89C6a7995f63FB9b4BB5b75D72eeBf022F388452", // StabilityFlash.sol
 			hydro: "0x80dA9DF7EE07C8dE71725f62451A6623B79a4b53", // HydroToken.sol
 			usx: "0xba51Cf0C48407beeed64C524eFc51d57891AfEd1",
@@ -21,8 +22,8 @@ export const state = () => ({
 export type ContractState = ReturnType<typeof state>
 
 export const getters: GetterTree<ContractState, Web3State> = {
-	stability: (state: any, _getters, store: any) => {
-		const addr = state.addr[store.web3Store.chainId as number].stability;
+	boardroom: (state: any, _getters, store: any) => {
+		const addr = state.addr[store.web3Store.chainId as number].boardroom;
 		return addr;
 	},
 
