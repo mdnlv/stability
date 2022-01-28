@@ -62,8 +62,8 @@ export default {
 				dollar: 675.29
 			},
 			allowance: {
-				usx: null,
-				hx: null
+				usx: localStorage.getItem("allowance_usx") ? localStorage.getItem("allowance_usx") : null,
+				hx: localStorage.getItem("allowance_hx") ? localStorage.getItem("allowance_hx") : null
 			},
 			account: ""
 		};
@@ -87,7 +87,6 @@ export default {
 	methods: {
 		async burnTokens() {
 			const contractAddress = this.$store.getters["addressStore/stabilityFlash"];
-
 			if (this.tokenBurn === "HX" && this.account !== "") {
 				const hydroAllowance = await this.$store.getters["erc20Store/hydro"].methods.allowance(this.account, contractAddress).call();
 				this.allowance.hx = hydroAllowance;
@@ -112,6 +111,7 @@ export default {
 			if (this.tokenBurn === "HX" && this.account !== "") {
 				const hydroAllowance = await this.$store.getters["erc20Store/hydro"].methods.allowance(this.account, contractAddress).call();
 				this.allowance.hx = hydroAllowance;
+				localStorage.setItem("allowance_hx", hydroAllowance);
 				await this.$store.dispatch("erc20Store/approveHydro", {
 					address: this.account,
 					chainId: this.$store.getters["web3Store/chainId"],
@@ -120,6 +120,7 @@ export default {
 			if (this.tokenBurn === "USX" && this.account !== "") {
 				const usxAllowance = await this.$store.getters["erc20Store/usx"].methods.allowance(this.account, contractAddress).call();
 				this.allowance.usx = usxAllowance;
+				localStorage.setItem("allowance_usx", usxAllowance);
 				await this.$store.dispatch("erc20Store/approveUsx", {
 					address: this.account,
 					chainId: this.$store.getters["web3Store/chainId"]

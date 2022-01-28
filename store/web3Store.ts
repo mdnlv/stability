@@ -85,6 +85,8 @@ export const actions: ActionTree<Web3State, Web3State> = {
 		commit("setBalance", 0);
 		localStorage.removeItem("account");
 		localStorage.removeItem("balance");
+		localStorage.removeItem("allowance_usx");
+		localStorage.removeItem("allowance_hx");
 	}
 };
 
