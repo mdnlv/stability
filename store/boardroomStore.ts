@@ -25,7 +25,6 @@ export const getters: GetterTree<BoardroomState, Web3State> = {
 
 	getEarned: async (_state: any, getters: any, store: any ) => {
 		const web3 = store.web3Store.instance();
-		/** @TODO Change address to current user connected **/
-		return web3.utils.fromWei(await getters.instance.methods.earned("0x0e11924EE7DA81B3d9aBcc2339e562fc3747B3Bf").call());
+		return web3.utils.fromWei(await getters.instance.methods.earned(store.web3Store.account).call());
 	}
 };
