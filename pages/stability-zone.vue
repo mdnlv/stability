@@ -82,11 +82,11 @@
 					</DataCardLoader>
 					<DataCardLoader v-if="price.usx > tolerance.high">
 						<p>Claim your profits:</p>
-						<TheButton :disabled="account === '' || numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim" @click="showModal">
+						<TheButton :disabled="account === '' /*|| numberWithCommas(claimBalance.toFixed(2)) == 0 || !readyToClaim*/" @click="showModal">
 							Claim
 						</TheButton>
 					</DataCardLoader>
-					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" @close-modal="closeModal" @show-toast="showToast" />
+					<TheModal v-if="price.usx > tolerance.high" v-show="isModalVisible" :account="account" @close-modal="closeModal" @show-toast="showToast" />
 					<TheToast v-show="isToastVisible" :toast-type="toastType" @close-toast="closeToast" />
 				</LayoutDataCard>
 				<TheLoader component="burn-card">

@@ -40,6 +40,12 @@ export default {
 	components: {
 		CloseIcon
 	},
+	props: {
+		account: {
+			type: String,
+			required: true
+		}
+	},
 	data () {
 		return {
 			tokens: TokenData,
@@ -81,6 +87,7 @@ export default {
 			this.closeModal();
 			try {
 				await this.$store.dispatch("stabilityFlashStore/claimHydroProfits", {
+					address: this.account,
 					_claimInHYDRO: true,
 					_paidIn: "0x",
 					_HYDROToChosenRoute: "0x"
@@ -88,6 +95,7 @@ export default {
 				this.$emit("show-toast", "success");
 			} catch (error) {
 				this.$emit("show-toast", "alert");
+				console.log(error);
 			}	
 		}
 	}

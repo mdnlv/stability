@@ -52,8 +52,8 @@ export const actions: ActionTree<StabilityState, StabilityState> = {
 		).send({from: address});
 	},
 
-	async claimHydroProfits(ctx: any, {_claimInHYDRO, _paidIn, _HYDROToChosenRoute}) {
-		await ctx.getters.instance.methods.claimHYDROProfits(_claimInHYDRO, _paidIn, _HYDROToChosenRoute);
+	async claimHydroProfits(ctx: any, {address, _claimInHYDRO, _paidIn, _HYDROToChosenRoute}) {
+		await ctx.getters.instance.methods.claimHYDROProfits(_claimInHYDRO, _paidIn, _HYDROToChosenRoute).send({from: address});
 	},
 };
 
