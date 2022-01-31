@@ -25,6 +25,7 @@ export const getters: GetterTree<BoardroomState, Web3State> = {
 
 	getEarned: async (_state: any, getters: any, store: any ) => {
 		const web3 = store.web3Store.instance();
-		return web3.utils.fromWei(await getters.instance.methods.earned(store.web3Store.account).call());
+		console.log(store.web3Store.account);
+		return store.web3Store.account !== "" ? web3.utils.fromWei(await getters.instance.methods.earned(store.web3Store.account).call()) : 0;
 	}
 };
