@@ -67,7 +67,7 @@
 						<h3>{{ numberWithCommas(stakedBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getStakedDollar(stakedBalance).toFixed(2)) }}</h5>
 					</DataCardLoader>
-					<DataCardLoader v-if="price.usx > tolerance.high">
+					<DataCardLoader v-if="price.usx > tolerance.high && account !== ''">
 						<p>Pending to claim:</p>
 						<h3>{{ numberWithCommas(claimBalance.toFixed(2)) }}<sup>HX</sup></h3>
 						<h5>${{ numberWithCommas(getClaimDollar(claimBalance).toFixed(2)) }}</h5>
