@@ -2,7 +2,7 @@
 	<LayoutFooter>
 		<TheWallet />
 		<p>Version {{ appVersion }}</p>
-		<p class="block-number">Latest Block: <a :href="`https://etherscan.io/block/${blockNumber}`" title="Click to view the latest block" target="_blank" rel="noopener noreferrer">{{ blockNumber }}</a></p>
+		<TheLoader width="u-w-115 u-h-18"><p class="block-number">Latest Block: <a :href="`https://etherscan.io/block/${blockNumber}`" title="Click to view the latest block" target="_blank" rel="noopener noreferrer">{{ blockNumber }}</a></p></TheLoader>
 		<ul class="social-icons">
 			<li>
 				<a href="https://twitter.com/ultra_stable" target="_blank" rel="noopener noreferrer" title="Click to follow us on Twitter">
@@ -37,6 +37,7 @@ export default {
 	async mounted() {
 		web3 = this.$store.getters["web3Store/instance"]();
 		this.blockNumber = await web3.eth.getBlockNumber();
+		this.$store.commit("rootStore/setIsLoaded", true);
 	}
 };
 </script>

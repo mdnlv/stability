@@ -10,3 +10,10 @@
 	margin-bottom: 0;
 	font-size: 12px;
 }
+.l-footer .block-number {
+	display: flex;
+	flex-direction: row;
+}
+.l-footer .block-number a {
+	margin-left: 0.2rem;
+}
